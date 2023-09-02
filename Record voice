@@ -1,0 +1,21 @@
+import sounddevice as sd
+import wavio
+
+def record_audio(filename, duration, sample_rate):
+    print("Recording...")
+    audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1)
+    sd.wait()
+    print("Recording done.")
+    
+    wavio.write(filename, audio_data, sample_rate, sampwidth=2)  # Save as a WAV file
+
+def main():
+    filename = input("Enter the filename for the recorded audio (e.g., recording.wav): ")
+    duration = float(input("Enter the duration of the recording (in seconds): "))
+    sample_rate = 44100  # You can adjust this value as needed
+    
+    record_audio(filename, duration, sample_rate)
+    print(f"Recording saved as {filename}")
+
+
+
